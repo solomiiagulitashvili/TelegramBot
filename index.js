@@ -1,3 +1,5 @@
+const express = require("express");
+const app = express();
 const TelegramBot = require("node-telegram-bot-api");
 
 const token = "1000268978:AAFrnLjdhcqFnF-5Hj8gxuxnwVdKXQZxG3k";
@@ -40,8 +42,6 @@ setInterval(() => {
   }
 }, 1000);
 
-const port = process.env.PORT || 8080;
-
-app.listen(port, function() {
-  console.log("app running on port 8080");
+app.listen(process.env.PORT || 8080, () => {
+  console.log("i am listening");
 });
