@@ -42,6 +42,6 @@ setInterval(() => {
 
 const port = process.env.PORT || 8080;
 
-const server = app.listen(port, function() {
+app.listen(port, function() {
   console.log("app running on port 8080");
 });
