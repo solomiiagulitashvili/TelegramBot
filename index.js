@@ -7,7 +7,14 @@ const bot = new TelegramBot(token, { polling: true });
 
 let notes = [];
 
-bot.onText(/\/напомни (.+) в (.+)/, function(msg, match) {
+bot.onText(/\/start/, msg => {
+  bot.sendMessage(
+    msg.from.id,
+    "Введи задание и время, а я напомню (Пример: /напомни покормить кошку в 14:30)."
+  );
+});
+
+bot.onText(/\/напомни (.+) в (.+)/, (msg, match) => {
   const userId = msg.from.id;
   let note = match[1];
   let time = match[2];
@@ -18,7 +25,15 @@ bot.onText(/\/напомни (.+) в (.+)/, function(msg, match) {
 
 setInterval(() => {
   for (let i = 0; i < notes.length; i++) {
-    const currentDate = new Date().getHours() + ":" + new Date().getMinutes();
+    const minutes = new Date().getMinutes();
+    let minutesFormatted = minutes;
+    console.log(minutesFormatted);
+    if (minutes < 10) {
+      minutesFormatted = "0" + minutes;
+    }
+
+    const currentDate = new Date().getHours() + ":" + minutesFormatted;
+    console.log(currentDate);
     if (notes[i]["time"] === currentDate) {
       bot.sendMessage(notes[i]["id"], "Самое время" + " " + notes[i]["note"]);
       notes.splice(i, 1);
