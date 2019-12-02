@@ -41,7 +41,9 @@ setInterval(() => {
     }
   }
 }, 1000);
-
+app.get("/*", (req, res) => {
+  res.status(200).send();
+});
 app.listen(process.env.PORT || 8080, () => {
   console.log("i am listening");
 });
